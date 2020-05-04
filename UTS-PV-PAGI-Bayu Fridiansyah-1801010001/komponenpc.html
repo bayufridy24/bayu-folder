@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style2.css">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Pembayaran Laptop</h1><br>
+    </div>
+    <form action="" id="form1">
+        <div class="textbox">
+            <select name="laptop" id="aserasus" onchange="tampilkan()">
+                <option value="" disabled selected>Nama Komponen</option>
+                <option value="200000" id="a1">RAM</option>
+                <option value="500000" id="a2">HARDISK</option>
+                <option value="4000000" id="a3">PROCESOR</option>
+                <option value="2000000" id="b1">VGA</option>
+                <option value="800000" id="b2">PSU</option>
+                <option value="400000" id="b3">CASING</option>
+            </select><br><br>
+        </div>
+        <label for="harga">Harga:</label>
+        <div class="textbox">
+            <input  type="number" id="harga">
+        </div>
+        <label for="jumlah">Jumlah:</label>
+        <div class="textbox">
+            <input type="number" placeholder="Ketik di sini" id="jumlah" onchange="proses()">
+        </div>
+        <input id="count" type="button" value="Hitung" onclick="hitung()">
+        <hr>
+        <label for="total">Total:</label>
+        <div class="textbox">
+            <input type="number" id="total">
+        </div>
+        <label for="uang">Bayar:</label>
+        <div class="textbox">
+            <input type="number" id="uang" placeholder="Ketik disini">
+        </div>
+        <label for="kembalian">Kembalian:</label>
+        <div class="textbox">
+            <input type="number" name="kembalian" id="kembalian">
+        </div>
+        <input class="tombol" type="button" value="Bayar" onclick="bayar()">
+        <input class="tombol" type="button" value="Reload" onclick="document.location.reload(true)">
+    </form>
+    <script>
+        function tampilkan(){
+            var stuan=0;
+            var hrgsatuan;
+            
+            if(document.getElementById("a1").selected){
+                hrgsatuan=document.getElementById("a1").value;
+                stuan=stuan+parseInt(hrgsatuan);
+            }
+            if(document.getElementById("a2").selected){
+                hrgsatuan=document.getElementById("a2").value;
+                stuan=stuan+parseInt(hrgsatuan);
+            }
+            if(document.getElementById("a3").selected){
+                hrgsatuan=document.getElementById("a3").value;
+                stuan=stuan+parseInt(hrgsatuan);
+            }
+            if(document.getElementById("b1").selected){
+                hrgsatuan=document.getElementById("b1").value;
+                stuan=stuan+parseInt(hrgsatuan);
+            }
+            if(document.getElementById("b2").selected){
+                hrgsatuan=document.getElementById("b2").value;
+                stuan=stuan+parseInt(hrgsatuan);
+            }
+            if(document.getElementById("b3").selected){
+                hrgsatuan=document.getElementById("b3").value;
+                stuan=stuan+parseInt(hrgsatuan);
+            }
+            document.getElementById("harga").value=stuan;
+        }
+
+        function hitung(){
+            a = eval(form1.harga.value);
+            b = eval(form1.jumlah.value);
+            c = a*b
+            form1.total.value = c;
+        }
+
+        function bayar(){
+            a = eval(form1.total.value);
+            b = eval(form1.uang.value);
+            c = b-a
+            form1.kembalian.value = c;
+        }
+
+        function reloadpage(){
+            location.reload()
+        }
+            
+    </script>
+</body>
+</html>
