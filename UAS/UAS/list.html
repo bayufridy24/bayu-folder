@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/style2.css">
+    </head>
+    <body>
+        <h1>Daftar Pembelian</h1>
+        <div id="list"></div>
+    </body>
+</html>
+
+<script>
+    const electron = require("electron");
+    const {ipcRenderer} = electron;
+    ipcRenderer.send("appointment:request:list");
+
+    ipcRenderer.on("appointment:response:list", (event, appointment) => {
+        const listDiv = document.getElementById("list");
+        listDiv.innerHTML="";
+
+        appointment.forEach(appointment => {
+            const appointmentDiv = document.createElement("div");
+            const aserasusParagraph = document.createElement("p");
+            aserasusParagraph.innerHTML = `Name: ${appointment.aserasus}`;
+
+            const hargaParagraph = document.createElement("p");
+            hargaParagraph.innerHTML = `Harga: ${ appointment.harga}`;
+
+            const jumlahParagraph = document.createElement("p");
+            jumlahParagraph.innerHTML = `Jumlah: ${appointment.jumlah}`;
+
+            const totalParagraph = document.createElement("p");
+            totalParagraph.innerHTML = `Total: ${appointment.total}`;
+
+            const uangParagraph = document.createElement("p");
+            uangParagraph.innerHTML = `Bayar: ${appointment.uang}`;
+
+            const kembalianParagraph = document.createElement("p");
+            kembalianParagraph.innerHTML = `Kembalian: ${appointment.kembalian}`;
+
+
+            const hr = document.createElement("hr");
+            appointmentDiv.appendChild(aserasusParagraph);
+            appointmentDiv.appendChild(hargaParagraph);
+            appointmentDiv.appendChild(jumlahParagraph);
+            appointmentDiv.appendChild(totalParagraph);
+            appointmentDiv.appendChild(uangParagraph);
+            appointmentDiv.appendChild(kembalianParagraph);
+            appointmentDiv.appendChild(hr);
+            
+            listDiv.append(appointmentDiv);
+        });
+    });
+    const done = id => {
+        ipcRenderer.send("appointment:done", id);
+    };
+</script>
